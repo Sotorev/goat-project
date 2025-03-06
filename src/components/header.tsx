@@ -55,7 +55,7 @@ function Header() {
             className={`
               hidden md:flex nav-col font-bold items-center justify-center
               transition-colors duration-500
-              ${scrollDirection === "NONE" && !isMenuOpen ? "text-black dark:text-white" : "text-white"}
+              ${scrollDirection === "NONE" && !isMenuOpen ? "text-black" : "text-white"}
             `}
           >
             <nav className="h-full w-full flex items-center justify-center">
@@ -81,7 +81,7 @@ function Header() {
                     className={`
                     px-4 py-6 rounded-full font-semibold
                     transition-colors duration-500
-                    ${scrollDirection === "NONE" && !isMenuOpen ? "bg-[#0037fc] text-white" : "bg-white text-black dark:bg-white dark:text-black"}
+                    ${scrollDirection === "NONE" && !isMenuOpen ? "bg-[#0037fc] text-white" : "bg-white text-black"}
                     `}
                   >
                     Contáctanos
@@ -104,13 +104,13 @@ function Header() {
               <span
                 className={`
                 block w-8 h-0.5 rounded-full transition-all duration-300 ease-in-out
-                ${isMenuOpen ? "rotate-45 translate-y-1.5 bg-white" : `${scrollDirection === "NONE" ? "bg-black dark:bg-white" : "bg-white"} mb-2`}
+                ${isMenuOpen ? "rotate-45 translate-y-1.5 bg-white" : `${scrollDirection === "NONE" ? "bg-black" : "bg-white"} mb-2`}
               `}
               ></span>
               <span
                 className={`
                 block w-8 h-0.5 rounded-full transition-all duration-300 ease-in-out
-                ${isMenuOpen ? "-rotate-45 bg-white" : `${scrollDirection === "NONE" ? "bg-black dark:bg-white" : "bg-white"}`}
+                ${isMenuOpen ? "-rotate-45 bg-white" : `${scrollDirection === "NONE" ? "bg-black" : "bg-white"}`}
               `}
               ></span>
             </button>
