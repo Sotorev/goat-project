@@ -23,9 +23,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html  lang="en">
       <body
-        className={`${monaSans.className} ${roboto.className} antialiased`}
+        className={`${monaSans.className} ${roboto.className} antialiased `}
       >
         {children}
       </body>

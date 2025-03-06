@@ -1,12 +1,15 @@
 "use client"
 import Link from "next/link"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import useScroll from "@/hooks/use-scroll-dir"
 import IsoLogo from "@/components/brand/isologo"
+import { useTheme } from "@/hooks/use-theme"
+import { ThemeToggle } from "./theme-toggle"
 
 function Header() {
   const scrollDirection = useScroll()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { isDarkMode } = useTheme()
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -17,29 +20,6 @@ function Header() {
       document.body.style.overflow = "auto"
     }
   }
-
-  useEffect(() => {
-    // Esta función se ejecutará cuando cambie el modo oscuro
-    const handleDarkModeChange = () => {
-      // Forzar re-render cuando cambia el modo oscuro
-      setIsMenuOpen(isMenuOpen)
-    }
-
-    // Observar cambios en la clase 'dark' del documento
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.type === "attributes" && mutation.attributeName === "class") {
-          handleDarkModeChange()
-        }
-      })
-    })
-
-    observer.observe(document.documentElement, { attributes: true })
-
-    return () => {
-      observer.disconnect()
-    }
-  }, [isMenuOpen])
 
   return (
     <header
@@ -56,7 +36,7 @@ function Header() {
         grid grid-cols-2 w-full p-2.5
         rounded-full
         transition-colors duration-500
-        ${scrollDirection === "NONE" && !isMenuOpen ? "" : "bg-[#1d2027] dark:bg-neutral-600"}
+        ${scrollDirection === "NONE" && !isMenuOpen ? "" : "bg-[#1d2027]"}
         `}
         >
           <div className="logo-col pl-4 flex items-center">
@@ -65,7 +45,7 @@ function Header() {
                 className="cursor-pointer"
                 width={200}
                 height={100}
-                color={`${scrollDirection === "NONE" && !isMenuOpen ? (document.documentElement.classList.contains("dark") ? "#FFF" : "#000") : "#FFF"}`}
+                color={`${scrollDirection === "NONE" && !isMenuOpen ? (isDarkMode ? "#FFF" : "#000") : "#FFF"}`}
               />
             </Link>
           </div>
@@ -109,6 +89,9 @@ function Header() {
                 </li>
               </ul>
             </nav>
+            <div className="text-white">
+              <ThemeToggle />
+            </div>
           </div>
 
           {/* Botón de menú para móvil */}
