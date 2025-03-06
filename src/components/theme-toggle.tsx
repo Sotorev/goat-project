@@ -1,7 +1,7 @@
 "use client"
 
-import { useTheme } from "@/hooks/use-theme"
-import { Moon, Sun, Monitor, ChevronDown } from 'lucide-react'
+import { useTheme } from "@/components/context/theme-provider"
+import { Moon, Sun, Monitor, ChevronDown } from "lucide-react"
 import { useEffect, useState, useRef } from "react"
 
 export function ThemeToggle() {
@@ -10,23 +10,19 @@ export function ThemeToggle() {
 	const [isExpanded, setIsExpanded] = useState(false)
 	const menuRef = useRef<HTMLDivElement>(null)
 
-	// Avoid hydration mismatch
 	useEffect(() => {
 		setMounted(true)
 	}, [])
 
-	// Close menu when clicking outside
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
 			if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
 				setIsExpanded(false)
 			}
 		}
-
 		if (isExpanded) {
 			document.addEventListener("mousedown", handleClickOutside)
 		}
-
 		return () => {
 			document.removeEventListener("mousedown", handleClickOutside)
 		}
@@ -36,7 +32,6 @@ export function ThemeToggle() {
 		return null
 	}
 
-	// Get the current theme icon
 	const getCurrentIcon = () => {
 		switch (theme) {
 			case "light":
@@ -50,7 +45,6 @@ export function ThemeToggle() {
 		}
 	}
 
-	// Get the current theme label
 	const getCurrentLabel = () => {
 		switch (theme) {
 			case "light":
@@ -84,16 +78,14 @@ export function ThemeToggle() {
 			</button>
 
 			{isExpanded && (
-				<div className="absolute right-0 mt-2 w-40 bg-[#1d2027] dark:bg-white dark:text-black rounded-lg shadow-lg overflow-hidden z-10 border border-gray-200  animate-in fade-in slide-in-from-top-5 duration-200">
+				<div className="absolute right-0 mt-2 w-40 bg-[#1d2027] dark:bg-white dark:text-black rounded-lg shadow-lg overflow-hidden z-10 border border-gray-200 animate-in fade-in slide-in-from-top-5 duration-200">
 					<div className="p-1">
 						<button
 							onClick={() => {
 								setMode("light")
 								setIsExpanded(false)
 							}}
-							className={`flex items-center w-full gap-2 px-3 py-2 text-sm rounded-md ${theme === "light"
-									? "bg-gray-500 dark:bg-neutral-200 font-medium"
-									: "hover:bg-gray-500 dark:hover:bg-neutral-300"
+							className={`flex items-center w-full gap-2 px-3 py-2 text-sm rounded-md ${theme === "light" ? "bg-gray-500 dark:bg-neutral-200 font-medium" : "hover:bg-gray-500 dark:hover:bg-neutral-300"
 								}`}
 							aria-label="Modo claro"
 						>
@@ -105,9 +97,7 @@ export function ThemeToggle() {
 								setMode("dark")
 								setIsExpanded(false)
 							}}
-							className={`flex items-center w-full gap-2 px-3 py-2 text-sm rounded-md ${theme === "dark"
-								? "bg-gray-100 dark:bg-neutral-200 font-medium"
-								: "hover:bg-gray-500 dark:hover:bg-neutral-300"
+							className={`flex items-center w-full gap-2 px-3 py-2 text-sm rounded-md ${theme === "dark" ? "bg-gray-500 dark:bg-neutral-200 font-medium" : "hover:bg-gray-500 dark:hover:bg-neutral-300"
 								}`}
 							aria-label="Modo oscuro"
 						>
@@ -119,9 +109,7 @@ export function ThemeToggle() {
 								setMode("system")
 								setIsExpanded(false)
 							}}
-							className={`flex items-center w-full gap-2 px-3 py-2 text-sm rounded-md ${theme === "system"
-								? "bg-gray-100 dark:bg-neutral-200 font-medium"
-								: "hover:bg-gray-500 dark:hover:bg-neutral-300"
+							className={`flex items-center w-full gap-2 px-3 py-2 text-sm rounded-md ${theme === "system" ? "bg-gray-500 dark:bg-neutral-200 font-medium" : "hover:bg-gray-500 dark:hover:bg-neutral-300"
 								}`}
 							aria-label="Usar tema del sistema"
 						>

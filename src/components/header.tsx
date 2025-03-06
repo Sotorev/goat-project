@@ -1,9 +1,10 @@
 "use client"
+
 import Link from "next/link"
 import { useState } from "react"
 import useScroll from "@/hooks/use-scroll-dir"
 import IsoLogo from "@/components/brand/isologo"
-import { useTheme } from "@/hooks/use-theme"
+import { useTheme } from "@/components/context/theme-provider"
 import { ThemeToggle } from "./theme-toggle"
 
 function Header() {
@@ -13,7 +14,6 @@ function Header() {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
-    // Prevenir scroll cuando el menú está abierto
     if (!isMenuOpen) {
       document.body.style.overflow = "hidden"
     } else {
@@ -24,27 +24,27 @@ function Header() {
   return (
     <header
       className={`
-        w-full fixed left-0 right-0 px-4 z-50
+        w-full fixed left-0 right-0 px-12 z-50
         transition-all duration-500 ease-in-out
         ${scrollDirection === "DOWN" && !isMenuOpen ? "-top-32" : "top-10"}
         ${scrollDirection !== "NONE" ? "" : ""}
       `}
     >
-      <div className="">
+      <div>
         <div
           className={`
-        grid grid-cols-2 w-full p-2.5
-        rounded-full
-        transition-colors duration-500
-        ${scrollDirection === "NONE" && !isMenuOpen ? "" : "bg-[#1d2027]"}
-        `}
+            grid grid-cols-2 w-full p-4
+            rounded-full
+            transition-colors duration-500
+            ${scrollDirection === "NONE" && !isMenuOpen ? "" : "bg-[#1d2027]"}
+          `}
         >
           <div className="logo-col pl-4 flex items-center">
             <Link href="/">
               <IsoLogo
                 className="cursor-pointer"
                 width={200}
-                height={100}
+                height={50}
                 color={`${scrollDirection === "NONE" && !isMenuOpen ? (isDarkMode ? "#FFF" : "#000") : "#FFF"}`}
               />
             </Link>
@@ -53,25 +53,25 @@ function Header() {
           {/* Navegación para escritorio */}
           <div
             className={`
-              hidden md:flex nav-col font-bold items-center justify-center
-              transition-colors duration-500
-              ${scrollDirection === "NONE" && !isMenuOpen ? "text-black" : "text-white"}
+              hidden md:flex font-bold items-center justify-center
+              transition-colors duration-500 h-full
+              ${scrollDirection === "NONE" && !isMenuOpen ? (isDarkMode ? "text-white" : "text-black") : "text-white"}
             `}
           >
-            <nav className="h-full w-full flex items-center justify-center">
-              <ul className="flex gap-6 py-6 items-center h-full">
+            <nav className="h-full w-full flex items-center justify-center ">
+              <ul className="flex gap-6 py-2 items-center ">
                 <li>
-                  <Link href="/nuestro-trabajo" className="py-2">
+                  <Link href="/nuestro-trabajo" >
                     Nuestro trabajo
                   </Link>
                 </li>
                 <li>
-                  <Link href="/servicios" className="py-2">
+                  <Link href="/servicios" >
                     Servicios
                   </Link>
                 </li>
                 <li>
-                  <Link href="/blog" className="py-2">
+                  <Link href="/blog" >
                     Blog
                   </Link>
                 </li>
@@ -79,9 +79,9 @@ function Header() {
                   <Link
                     href="/contacto"
                     className={`
-                    px-4 py-6 rounded-full font-semibold
-                    transition-colors duration-500
-                    ${scrollDirection === "NONE" && !isMenuOpen ? "bg-[#0037fc] text-white" : "bg-white text-black"}
+                      px-4 py-5 rounded-full font-semibold
+                      transition-colors duration-500
+                      ${scrollDirection === "NONE" && !isMenuOpen ? "bg-[#0037fc] text-white" : "bg-white text-black"}
                     `}
                   >
                     Contáctanos
@@ -103,15 +103,15 @@ function Header() {
             >
               <span
                 className={`
-                block w-8 h-0.5 rounded-full transition-all duration-300 ease-in-out
-                ${isMenuOpen ? "rotate-45 translate-y-1.5 bg-white" : `${scrollDirection === "NONE" ? "bg-black" : "bg-white"} mb-2`}
-              `}
+                  block w-8 h-0.5 rounded-full transition-all duration-300 ease-in-out
+                  ${isMenuOpen ? "rotate-45 translate-y-1.5 bg-white" : `${scrollDirection === "NONE" ? (isDarkMode ? "bg-white" : "bg-black") : "bg-white"} mb-2`}
+                `}
               ></span>
               <span
                 className={`
-                block w-8 h-0.5 rounded-full transition-all duration-300 ease-in-out
-                ${isMenuOpen ? "-rotate-45 bg-white" : `${scrollDirection === "NONE" ? "bg-black" : "bg-white"}`}
-              `}
+                  block w-8 h-0.5 rounded-full transition-all duration-300 ease-in-out
+                  ${isMenuOpen ? "-rotate-45 bg-white" : `${scrollDirection === "NONE" ? (isDarkMode ? "bg-white" : "bg-black") : "bg-white"} mb-2`}
+                `}
               ></span>
             </button>
           </div>
@@ -121,12 +121,12 @@ function Header() {
       {/* Menú móvil tipo cortina */}
       <div
         className={`
-        fixed inset-0 bg-[#1d2027] z-40
-        transition-transform duration-500 ease-in-out
-        ${isMenuOpen ? "translate-y-0" : "-translate-y-full"}
-        flex flex-col items-center justify-center
-        md:hidden
-      `}
+          fixed inset-0 bg-[#1d2027] z-40
+          transition-transform duration-500 ease-in-out
+          ${isMenuOpen ? "translate-y-0" : "-translate-y-full"}
+          flex flex-col items-center justify-center
+          md:hidden
+        `}
       >
         <nav className="w-full">
           <ul className="flex flex-col items-center gap-8 text-white text-xl font-bold">
@@ -162,4 +162,3 @@ function Header() {
 }
 
 export default Header
-

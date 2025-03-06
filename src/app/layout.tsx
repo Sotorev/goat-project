@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto_Mono, Mona_Sans } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/context/theme-provider";
 
 const roboto = Roboto_Mono({
   variable: "--font-roboto",
@@ -23,11 +24,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html  lang="en">
+    <html lang="en">
       <body
         className={`${monaSans.className} ${roboto.className} antialiased `}
       >
-        {children}
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
