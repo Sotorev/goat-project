@@ -3,12 +3,14 @@
 import { useTheme } from "@/components/context/theme-provider"
 import { Moon, Sun, Monitor, ChevronDown } from "lucide-react"
 import { useEffect, useState, useRef } from "react"
+import useScroll from "@/hooks/use-scroll-dir"
 
 export function ThemeToggle() {
-	const { theme, setMode } = useTheme()
+	const { theme, setMode, isDarkMode } = useTheme()
 	const [mounted, setMounted] = useState(false)
 	const [isExpanded, setIsExpanded] = useState(false)
 	const menuRef = useRef<HTMLDivElement>(null)
+	const scrollDirection = useScroll()
 
 	useEffect(() => {
 		setMounted(true)
@@ -62,7 +64,17 @@ export function ThemeToggle() {
 		<div className="relative" ref={menuRef}>
 			<button
 				onClick={() => setIsExpanded(!isExpanded)}
-				className="flex items-center gap-1.5 bg-[#1d2027] dark:bg-white dark:text-black p-2 rounded-full hover:bg-[#545966] dark:hover:bg-neutral-200 transition-colors"
+				className={`
+          flex items-center gap-1.5 p-2 rounded-full transition-colors
+          ${scrollDirection === "NONE"
+						? isDarkMode
+							? "bg-transparent text-white hover:bg-white/10"
+							: "bg-transparent text-black hover:bg-black/10"
+						: isDarkMode
+							? "bg-transparent text-white hover:bg-white/10"
+							: "bg-transparent text-white hover:bg-white/20"
+					}
+        `}
 				aria-expanded={isExpanded}
 				aria-haspopup="true"
 				aria-label="Cambiar tema"
@@ -71,21 +83,23 @@ export function ThemeToggle() {
 					{getCurrentIcon()}
 					<span className={`text-sm ${isExpanded ? "mr-0" : "mr-1"}`}>{getCurrentLabel()}</span>
 				</span>
-				<ChevronDown
-					size={16}
-					className={`transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
-				/>
+				<ChevronDown size={16} className={`transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} />
 			</button>
 
 			{isExpanded && (
-				<div className="absolute right-0 mt-2 w-40 bg-[#1d2027] dark:bg-white dark:text-black rounded-lg shadow-lg overflow-hidden z-10 border border-gray-200 animate-in fade-in slide-in-from-top-5 duration-200">
+				<div
+					className="absolute right-0 mt-2 w-40 rounded-lg shadow-lg overflow-hidden z-10 border animate-in fade-in slide-in-from-top-5 duration-200
+          dark:bg-black dark:text-white dark:border-white/20
+          bg-white text-black"
+				>
 					<div className="p-1">
 						<button
 							onClick={() => {
 								setMode("light")
 								setIsExpanded(false)
 							}}
-							className={`flex items-center w-full gap-2 px-3 py-2 text-sm rounded-md ${theme === "light" ? "bg-gray-500 dark:bg-neutral-200 font-medium" : "hover:bg-gray-500 dark:hover:bg-neutral-300"
+							className={`flex items-center w-full gap-2 px-3 py-2 text-sm rounded-md 
+                ${theme === "light" ? "bg-[#D35C1A] text-white font-medium" : "hover:bg-gray-100 dark:hover:bg-gray-800"
 								}`}
 							aria-label="Modo claro"
 						>
@@ -97,7 +111,8 @@ export function ThemeToggle() {
 								setMode("dark")
 								setIsExpanded(false)
 							}}
-							className={`flex items-center w-full gap-2 px-3 py-2 text-sm rounded-md ${theme === "dark" ? "bg-gray-500 dark:bg-neutral-200 font-medium" : "hover:bg-gray-500 dark:hover:bg-neutral-300"
+							className={`flex items-center w-full gap-2 px-3 py-2 text-sm rounded-md 
+                ${theme === "dark" ? "bg-[#D35C1A] text-white font-medium" : "hover:bg-gray-100 dark:hover:bg-gray-800"
 								}`}
 							aria-label="Modo oscuro"
 						>
@@ -109,7 +124,10 @@ export function ThemeToggle() {
 								setMode("system")
 								setIsExpanded(false)
 							}}
-							className={`flex items-center w-full gap-2 px-3 py-2 text-sm rounded-md ${theme === "system" ? "bg-gray-500 dark:bg-neutral-200 font-medium" : "hover:bg-gray-500 dark:hover:bg-neutral-300"
+							className={`flex items-center w-full gap-2 px-3 py-2 text-sm rounded-md 
+                ${theme === "system"
+									? "bg-[#D35C1A] text-white font-medium"
+									: "hover:bg-gray-100 dark:hover:bg-gray-800"
 								}`}
 							aria-label="Usar tema del sistema"
 						>
@@ -122,3 +140,4 @@ export function ThemeToggle() {
 		</div>
 	)
 }
+
