@@ -15,8 +15,8 @@ export default function HeroSection() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div className="space-y-8">
                         <div className="space-y-4">
-                        <h1 className="text-5xl md:text-6xl font-extrabold leading-tight text-[#D9D813]">
-                         Tu mejor aliado para el desarrollo de software
+                        <h1 className="text-5xl md:text-6xl font-extrabold leading-tight text-theme-orange dark:text-theme-yellow">
+                            Tu mejor aliado para el desarrollo de software
                         </h1>
                             <p className="text-gray-700 dark:text-gray-300 text-lg">
                                 Desarrollamos soluciones de software a medida para
@@ -31,7 +31,7 @@ export default function HeroSection() {
                         </div>
 
                         <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                            <button className="bg-[#D9D813] hover:bg-[#D9D813]/90 text-black font-medium px-6 py-3 rounded-lg transition-colors duration-200 shadow-sm hover:shadow hover:cursor-pointer">
+                            <button className="bg-theme-orange dark:bg-theme-yellow hover:bg-theme-orange/90 dark:hover:bg-theme-yellow/90 text-white dark:text-black font-medium px-6 py-3 rounded-lg transition-colors duration-200 shadow-sm hover:shadow hover:cursor-pointer">
                               Empieza ahora
                             </button>
                         </div>
@@ -49,6 +49,7 @@ export default function HeroSection() {
                             rotationSpeed={0.003}
                             rotationLimit={Math.PI / 4}
                             lightColor="white"
+                            pointColor={isDarkMode ? "white" : "black"}
                         />
                     </div>
                 </div>

@@ -38,7 +38,7 @@ function Header() {
             ${scrollDirection === "NONE" && !isMenuOpen
               ? isDarkMode
                 ? "bg-black/70"
-                : "bg-white/90"
+                : "bg-transparent"
               : isDarkMode
                 ? "bg-black border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.1)]"
                 : "bg-black shadow-lg"

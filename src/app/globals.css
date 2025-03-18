@@ -7,6 +7,14 @@
   --foreground: #171717;
 }
 
+@theme {
+  --color-theme-yellow: #d9d813;
+  --color-theme-orange: #d35c1a;
+  --color-theme-rose: #cc7c7c;
+  --color-theme-green: #005a49;
+
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
