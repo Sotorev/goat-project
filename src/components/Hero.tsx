@@ -15,7 +15,7 @@ export default function HeroSection() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div className="space-y-8">
                         <div className="space-y-4">
-                        <h1 className="text-5xl md:text-6xl font-extrabold leading-tight text-theme-orange dark:text-theme-yellow">
+                        <h1 className="text-5xl md:text-6xl font-extrabold leading-tight text-theme-blue-v1 dark:text-theme-yellow">
                             Tu mejor aliado para el desarrollo de software
                         </h1>
                             <p className="text-gray-700 dark:text-gray-300 text-lg">

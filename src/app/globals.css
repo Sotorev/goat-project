@@ -12,7 +12,10 @@
   --color-theme-orange: #d35c1a;
   --color-theme-rose: #cc7c7c;
   --color-theme-green: #005a49;
-
+  --color-theme-blue: #27548A;
+  --color-theme-blue-v1: #0768e1ff;
+  --color-theme-blue-v2: #008dffff;
+  
 }
 
 @theme inline {
