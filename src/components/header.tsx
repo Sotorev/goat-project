@@ -41,7 +41,7 @@ function Header() {
                 : "bg-transparent"
               : isDarkMode
                 ? "bg-black border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.1)]"
-                : "bg-black shadow-lg"
+                : "bg-white shadow-lg border border-black/20"
             }
           `}
         >
@@ -51,7 +51,7 @@ function Header() {
                 className="cursor-pointer"
                 width={150}
                 height={40}
-                color={`${scrollDirection === "NONE" && !isMenuOpen ? (isDarkMode ? "#FFF" : "#000") : "#FFF"}`}
+                color={`${scrollDirection === "NONE" && !isMenuOpen ? (isDarkMode ? "#FFF" : "#000") : "#000"}`}
               />
             </Link>
           </div>
@@ -61,7 +61,7 @@ function Header() {
             className={`
               hidden md:flex font-medium items-center justify-end pr-4
               transition-colors duration-500 h-full
-              ${scrollDirection === "NONE" && !isMenuOpen ? (isDarkMode ? "text-white" : "text-black") : "text-white"}
+              ${scrollDirection === "NONE" && !isMenuOpen ? (isDarkMode ? "text-white" : "text-black") : "text-black"}
             `}
           >
             <nav className="h-full flex items-center justify-end mr-4">
@@ -83,7 +83,7 @@ function Header() {
                       transition-all duration-500 hover:scale-105
                       ${isDarkMode
                         ? "bg-[#D9D813] text-black hover:bg-[#D9D813]/90"
-                        : "bg-[#D35C1A] text-white hover:bg-[#D35C1A]/90"
+                        : "bg-theme-dark-blue text-white hover:bg-theme-dark-blue/90"
                       }
                     `}
                   >
@@ -160,7 +160,7 @@ function Header() {
                 className={`inline-block px-8 py-3 rounded-full font-medium 
                   ${isDarkMode
                     ? "bg-[#D9D813] text-black hover:bg-[#D9D813]/90"
-                    : "bg-[#D35C1A] text-white hover:bg-[#D35C1A]/90"
+                    : "bg-theme-dark-blue text-white hover:bg-theme-dark-blue/90"
                   } 
                   transition-all duration-300`}
                 onClick={toggleMenu}

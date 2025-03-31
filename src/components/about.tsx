@@ -11,7 +11,7 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <div className="space-y-4">
-              <h2 className="text-5xl md:text-6xl font-extrabold leading-tight text-theme-orange dark:text-theme-yellow">
+              <h2 className="text-5xl md:text-6xl font-extrabold leading-tight text-black dark:text-theme-yellow">
                ¿Quienes somos?
               </h2>
             </div>

@@ -24,13 +24,9 @@ interface PositionProps {
 }
 
 export default function GeometricShaders({
-  position = "custom",
   width = "100%",
   height = "100%",
-  top,
-  right,
-  bottom,
-  left,
+
   isDarkMode = false,
 }: GeometricShadersProps) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -48,38 +44,12 @@ export default function GeometricShaders({
     return () => window.removeEventListener("mousemove", handleMouseMove)
   }, [])
 
-  // Determine position styles based on the position prop
-  const positionStyles = useMemo(() => {
-    if (position === "custom") {
-      return {
-        top: top || "auto",
-        right: right || "auto",
-        bottom: bottom || "auto",
-        left: left || "auto",
-      }
-    }
-
-    switch (position) {
-      case "top-right":
-        return { top: "0", right: "0" }
-      case "top-left":
-        return { top: "0", left: "0" }
-      case "bottom-right":
-        return { bottom: "0", right: "0" }
-      case "bottom-left":
-        return { bottom: "0", left: "0" }
-      default:
-        return { top: "0", right: "0" }
-    }
-  }, [position, top, right, bottom, left])
-
   return (
     <div
-      className="fixed -z-10 pointer-events-none"
+      className="absolute top-0 left-0 -z-10 pointer-events-none"
       style={{
         width,
         height,
-        ...positionStyles,
       }}
     >
       <Canvas dpr={[1, 2]} gl={{ antialias: true }}>
@@ -96,22 +66,13 @@ export default function GeometricShaders({
 
 
           {/* Middle left - Cube */}
-          <CubeWithTexture position={[-2.2, 0, 0]} isDarkMode={isDarkMode} />
+          <CubeWithTexture position={[0, 0, 0]} isDarkMode={isDarkMode} />
 
           {/* Middle center - Small Dot Grid */}
           <DotGrid position={[1, 2, 0]} rows={3} columns={3} spacing={0.2} dotSize={0.02} isDarkMode={isDarkMode} />
 
           {/* Middle right - Small Cube */}
           <CubeWithTexture position={[2, 0, 0]} scale={0.8} isDarkMode={isDarkMode} />
-
-
-          {/* Bottom center - Diagonal Lines */}
-          <DiagonalLines
-            position={[0.2, -1.8, 0]}
-            scale={0.4}
-            rotation={[0, 0, -Math.PI / 6]}
-            isDarkMode={isDarkMode}
-          />
 
           {/* Bottom right - Dot Grid */}
           <DotGrid position={[4, 0, 0]} rows={4} columns={4} isDarkMode={isDarkMode} />

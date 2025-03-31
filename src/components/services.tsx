@@ -56,10 +56,10 @@ export default function Services() {
 
               {/* Text Section - Alternating sides */}
               <div className={`space-y-6 ${index % 2 === 0 ? "lg:order-2" : "lg:order-1"}`}>
-                <h3 className="text-3xl font-bold text-theme-orange dark:text-theme-yellow">{service.title}</h3>
+                <h3 className="text-3xl font-bold text-black dark:text-theme-yellow">{service.title}</h3>
                 <p className="text-gray-700 dark:text-gray-300">{service.description}</p>
                 <div className="pt-2">
-                  <p className="text-theme-orange dark:text-theme-yellow font-medium flex items-center gap-2 group cursor-pointer">
+                  <p className="text-black dark:text-theme-yellow font-medium flex items-center gap-2 group cursor-pointer">
                     {service.cta}
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </p>

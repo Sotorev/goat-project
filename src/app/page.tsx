@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="relative min-h-screen bg-white dark:bg-black z-20">
       <Header />
-      <GeometricShaders isDarkMode={isDarkMode} />
+      <GeometricShaders isDarkMode={isDarkMode} height="100vh" width="100%"/>
       <main className="pt-32 px-4 sm:px-8 lg:px-12">
         <Hero />
         <About />
